@@ -51,3 +51,26 @@ SELECT *
 FROM SalesLT.Product
 WHERE SellStartDate < '2006-01-01' AND (SellEndDate > '2005-01-01' OR SellEndDate IS NULL)
 
+
+--======== ORDER BY ========--
+-- 1. Sortowanie szczegółów zamówienia według ilości zamówionej w kolejności malejącej, zwracając informację
+--    z kolumn 'SalesOrderID', 'OrderQty' oraz 'UnitPrice', tylko dla zamówień, które mają ilość zamówionych
+--    produktów większą niż 5
+
+SELECT SalesOrderID, OrderQty, UnitPrice
+FROM SalesLT.SalesOrderDetail
+WHERE OrderQty > 5
+ORDER BY OrderQty DESC;
+
+-- 2. Sortowanie zamówień według daty zamówienia 'OrderDate' w kolejności rosnącej, dodatkowo jeśli zamówienia
+--    mają tą samą datę to posortujemy je według ceny całkowitej 'SubTotal' w kolejności malejącej
+
+SELECT *
+FROM SalesLT.SalesOrderHeader
+ORDER BY OrderDate ASC, SubTotal DESC;
+
+-- 3. Sortowanie produktów po cenie 'ListPrice', w celu znalezienia i zwrócenia tylko najtańszego
+
+SELECT TOP 1 *
+FROM SalesLT.Product
+ORDER BY ListPrice ASC;
