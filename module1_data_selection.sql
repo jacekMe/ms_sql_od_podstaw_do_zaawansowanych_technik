@@ -74,3 +74,38 @@ ORDER BY OrderDate ASC, SubTotal DESC;
 SELECT TOP 1 *
 FROM SalesLT.Product
 ORDER BY ListPrice ASC;
+
+
+--======== FUNKCJE AGREGUJĄCE ========--
+-- 1. Obliczenie łącznej wartości zamówień w tabeli 'SalesOrderHeader'
+
+SELECT SUM(TotalDue) TotalOrdersValue
+FROM SalesLT.SalesOrderHeader;
+
+-- 2. Obliczenie średniej wartości produktów
+
+SELECT AVG(ListPrice) AveragePrice
+FROM SalesLT.Product;
+
+-- 3. Znalezienie najwyższej wartości w kolumnie 'StandardCost'
+
+SELECT MAX(StandardCost) MaxStandardCost
+FROM SalesLT.Product;
+
+-- 4. Znalezienie najniższej wartości w kolumnie OrderDate
+
+SELECT MIN(OrderDate) MinOrderDate
+FROM SalesLT.SalesOrderHeader
+
+-- 5. Ile jest wszystkich adresów dla stanu 'California'
+
+SELECT COUNT(*) TotalAddress
+FROM SalesLT.Address
+WHERE StateProvince = 'California'
+
+-- 6. Jaka jest liczba unikalnych miast stanu 'California
+
+SELECT COUNT(DISTINCT City) TotalCities
+FROM SalesLT.Address
+WHERE StateProvince = 'California'
+
