@@ -109,6 +109,7 @@ SELECT COUNT(DISTINCT City) TotalCities
 FROM SalesLT.Address
 WHERE StateProvince = 'California'
 
+
 --======== GROUP BY ========--
 -- 1. Znajdź liczbę miast dla każdego stanu 'StateProvince' z osobna
 
@@ -142,3 +143,26 @@ ORDER BY AveragePrice DESC
 SELECT Size, MIN(ListPrice) CheapestPrice
 FROM SalesLT.Product
 GROUP BY Size
+
+
+--======== HAVING ========--
+-- 1. Znajdź wszystkich sprzedawców, którzy obsługują co najmniej 100 klientów
+
+SELECT SalesPerson, COUNT(CustomerID) TotalCustomers
+FROM SalesLT.Customer
+GROUP BY SalesPerson
+HAVING COUNT(CustomerID) > 100
+
+-- 2. Znajdź, które modele produktu mają średnią cenę produktu większą niż 300
+
+SELECT ProductModelID, AVG(ListPrice)
+FROM SalesLT.Product
+GROUP BY ProductModelID
+HAVING AVG(ListPrice) > 300
+
+-- 3. Znajdź kolory produktów, które mają minimalną cenę 30
+
+SELECT Color, MIN(ListPrice)
+FROM SalesLT.Product
+GROUP BY Color
+HAVING MIN(ListPrice) >= 30
