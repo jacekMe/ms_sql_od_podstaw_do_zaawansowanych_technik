@@ -166,3 +166,29 @@ SELECT Color, MIN(ListPrice)
 FROM SalesLT.Product
 GROUP BY Color
 HAVING MIN(ListPrice) >= 30
+
+
+--======== CASE ========--
+-- 1. Zamień angielskie nazwy koloru na polskie odpowiedniki
+
+SELECT Name,
+    CASE Color
+        WHEN 'Black'  THEN 'Czarny'
+        WHEN 'White'  THEN 'Biały'
+        WHEN 'Red'    THEN 'Czerwony'
+        WHEN 'Blue'   THEN 'Niebieski'
+        WHEN 'Silver' THEN 'Srebrny'
+        WHEN 'Yellow' THEN 'Żółty'
+        ELSE Color
+    END TranslatedColor
+FROM SalesLT.Product
+
+-- 2. Na podstawie 'TotalDue' określ wartość zamówienia 
+
+SELECT SalesOrderID, TotalDue,
+    CASE 
+        WHEN TotalDue > 10000 THEN 'Big order'
+        WHEN TotalDue > 5000 THEN 'Medium order'
+        ELSE 'Small order'
+    END OrderSize
+FROM SalesLT.SalesOrderHeader
