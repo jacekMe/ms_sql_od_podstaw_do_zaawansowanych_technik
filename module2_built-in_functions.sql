@@ -81,3 +81,47 @@ SELECT POWER(2, 3) result
 SELECT SIGN(3240) sign_value
 
 
+--======== TEXT VALUE FUNCTIONS ========--
+
+--==== LEN ====--
+-- Zwraca długość łańcucha znaków
+SELECT LEN('Hello World')
+
+--==== LEFT ====--
+-- Zwraca określoną liczbę znaków z lewej strony łańcucha znaków
+SELECT LEFT('Hello World', 7)
+
+--==== RIGHT ====--
+-- Zwraca określoną liczbę znaków z prawej strony łańcucha znaków
+SELECT RIGHT('Hellow World', 9)
+
+--==== UPPER ====--
+-- Konwertuje łańcuch znaków na wielkie litery
+SELECT UPPER('hello world')
+
+--==== LOWER ====--
+-- Konwertuje łańcuch znaków na małe litery
+SELECT LOWER('HELLO WORLD')
+
+--==== SUBSTRING ====--
+-- Zwraca część łańcucha znaków rozpoczynając od określonej pozycji i o określonej długości
+SELECT SUBSTRING('Hello World', 7, 5)
+
+--==== REPLACE ====--
+-- Zamienia wystąpienia określonego fragmentu łańcucha znaków na inny fragment
+SELECT REPLACE('Hello World Hello', 'Hello', 'Hi')
+--==== TRIM ====--
+-- Usuwa spacje z początku i końca łańcucha znaków
+SELECT TRIM('     Hello World    ')
+
+--==== CONCAT ====--
+-- Łączy dwa lub więcej łańcuchów znaków
+SELECT CONCAT('Hello', ' ', 'World')
+
+--==== CHARINDEX ====--
+-- Zwraca pozycję określonego fragmentu w łańcuchu znaków
+SELECT CHARINDEX('ld', 'Hello World')
+-- jeżeli szukana fraza nie zostanie znaleziona, zapytanie zwróci 0
+SELECT CHARINDEX('Yo', 'Hello World')
+
+
