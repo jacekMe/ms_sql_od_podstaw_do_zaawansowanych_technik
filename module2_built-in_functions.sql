@@ -141,3 +141,39 @@ FROM SalesLT.Customer
 SELECT ProductDescriptionID, [Description]
 FROM SalesLT.ProductDescription
 WHERE LEN([Description]) > 20 AND CHARINDEX('?', [Description]) = 0
+
+
+--======== TIME AND DATA OPERATIONS ========--
+
+--==== GETDATE ====--
+-- zwraca bieżącą datę i czas
+SELECT GETDATE()
+
+--==== DATEADD ====--
+-- dodaje określoną liczbę jednostek (dni, miesięcy, lat itp.) do określonej daty
+SELECT DATEADD(DAY, 8, GETDATE())
+-- możemy również podać wartość ujemną, która pozwala na odjęcie określoną liczbę jednostek od określonej daty
+SELECT DATEADD(MONTH, -8, GETDATE())
+-- jednostki, które można wybrać to
+-- year, quarter, month, day, week, weekday, hour, minute, second, millisecond, microsecond, nanosecond
+
+--==== DATEDIFF ====--
+-- oblicza różnicę między dwiema datami w określonych jednostkach
+SELECT DATEDIFF(DAY, '2025-06-01', '2025-07-27')
+
+--==== DATEPART ====--
+-- pobiera określoną część daty lub czasu, np. dzień, miesiąc, rok, itp.
+SELECT DATEPART(MONTH, GETDATE())
+-- alternatywa
+SELECT  YEAR(GETDATE()) Year,
+        MONTH(GETDATE()) Month,
+        DAY(GETDATE()) Day
+
+--==== CONVERT ====--
+-- konwertuje wartości jednego typu danych na inne, na przykład z daty na ciąg znaków
+SELECT CONVERT(VARCHAR, GETDATE(), 120)
+-- liczba '120' jest kodem formatu daty używanym w funkcji CONVERT
+
+--==== FORMAT ====--
+-- umożliwia formatowanie dat i czasów zgodnie z określonym wzorcem
+SELECT FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm')
