@@ -125,3 +125,19 @@ SELECT CHARINDEX('ld', 'Hello World')
 SELECT CHARINDEX('Yo', 'Hello World')
 
 
+--======== TASKS TEXT VALUE FUNCTIONS ========--
+
+-- 1. Zwróć informacje: Imię, Nazwisko oraz inicjały osób 
+SELECT FirstName, LastName, LEFT(FirstName, 1) + LEFT(LastName, 1) Initials
+FROM SalesLT.Customer
+
+-- 2. Stwórz zapytanie SQL, które wykorzystując kolumnę EmailAddress, zwróci jedynie część adresu emial, która
+--    znajduje się przed znakiem '@' 
+SELECT LEFT(EmailAddress, CHARINDEX('@', EmailAddress) -1) UserName
+FROM SalesLT.Customer
+
+-- 3. Napisz zapytanie SQL, które zwróci identyfikator produktów oraz ich opisy. Pod warunkiem, że długość
+--    opisu przekracza 20 znaków i jednocześnie nie zawiera znaku zapytania '?'
+SELECT ProductDescriptionID, [Description]
+FROM SalesLT.ProductDescription
+WHERE LEN([Description]) > 20 AND CHARINDEX('?', [Description]) = 0
