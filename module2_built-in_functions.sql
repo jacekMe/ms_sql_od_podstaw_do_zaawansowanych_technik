@@ -200,3 +200,33 @@ FROM SalesLT.SalesOrderHeader
 
 SELECT SalesOrderNumber, OrderDate, SalesOrderNumber + '-' + FORMAT(OrderDate, 'yyyyMMdd') OrderNrDate
 FROM SalesLT.SalesOrderHeader
+
+
+--======== CONDITIONAL FUNCTIONS ========--
+
+--==== ISNULL ====--
+/*
+zwraca wartość podaną jako pierwszy argument, jeśli nie jest ona NULL, w przeciwnym wypadku zwraca wartość
+podaną jako drugi argument
+*/
+SELECT ISNULL(NULL, 1) Result
+
+SELECT ISNULL(MiddleName, 'n/a') MiddleName
+FROM SalesLT.Customer
+
+--==== COALESCE ====--
+-- zwraca pierwszy niepusty argument, jesli wszystkie argumenty są puste, zwraca NULL
+SELECT COALESCE(Title, MiddleName, 'n/a') [COALESCE]
+FROM SalesLT.Customer
+
+--==== NULLIF ====--
+-- zwraca wartość NULL, jeśli dwa argumenty są równe, w przeciwnym razie zwraca pierwszy argument
+SELECT NULLIF(1, 1) Result
+SELECT NULLIF(1, 2) Result
+
+--==== IIF ====--
+-- skrót od 'Immediate If' - zwraca wartość w zależności od spełnienia warunku
+SELECT IIF(1 > 0, 'True', 'False') Result
+
+SELECT SalesOrderID, TotalDue, IIF(TotalDue > 10000, 'Big order', 'Small order') OrderSize
+FROM SalesLT.SalesOrderHeader
