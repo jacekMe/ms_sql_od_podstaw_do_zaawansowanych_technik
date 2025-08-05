@@ -125,7 +125,7 @@ SELECT CHARINDEX('ld', 'Hello World')
 SELECT CHARINDEX('Yo', 'Hello World')
 
 
---======== TASKS TEXT VALUE FUNCTIONS ========--
+--======== TASKS - TEXT VALUE FUNCTIONS ========--
 
 -- 1. Zwróć informacje: Imię, Nazwisko oraz inicjały osób 
 SELECT FirstName, LastName, LEFT(FirstName, 1) + LEFT(LastName, 1) Initials
@@ -177,3 +177,26 @@ SELECT CONVERT(VARCHAR, GETDATE(), 120)
 --==== FORMAT ====--
 -- umożliwia formatowanie dat i czasów zgodnie z określonym wzorcem
 SELECT FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm')
+
+
+--======== TASKS - TIME AND DATA OPERATIONS ========--
+
+-- 1. Obliczanie opóźnienia dostawy zamówienia, różnica między datą zamówienia, a datą dostawy w dniach
+SELECT SalesOrderID, OrderDate, ShipDate, DATEDIFF(DAY, OrderDate, ShipDate) DeliveryDelaysInDays
+FROM SalesLT.SalesOrderHeader
+
+-- 2. Napisz zapytanie, które zwróci zamówienia z czerwca 2008
+SELECT *
+FROM SalesLT.SalesOrderHeader
+WHERE YEAR(OrderDate) = 2008 AND MONTH(OrderDate) = 6
+
+-- 3. Napisz zapytanie, które zwróci nazwę zamówienia w formacie
+--    <SalesOrderNumber>-<OrderDate:yyyyMMdd>
+SELECT SalesOrderNumber, OrderDate, CONCAT(SalesOrderNumber, '-', CONVERT(VARCHAR, OrderDate, 112)) OrderNrDate
+FROM SalesLT.SalesOrderHeader
+
+SELECT SalesOrderNumber, OrderDate, CONCAT(SalesOrderNumber, '-', FORMAT(OrderDate, 'yyyyMMdd')) OrderNrDate
+FROM SalesLT.SalesOrderHeader
+
+SELECT SalesOrderNumber, OrderDate, SalesOrderNumber + '-' + FORMAT(OrderDate, 'yyyyMMdd') OrderNrDate
+FROM SalesLT.SalesOrderHeader
